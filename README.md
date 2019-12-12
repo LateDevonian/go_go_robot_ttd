@@ -1,0 +1,1 @@
+The toy robot challenge done in go as a golang ttd learning exercise for moi. This is going to get messy
