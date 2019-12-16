@@ -9,6 +9,30 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
+func TestRobotPlace(t *testing.T) {
+	board := GameBoard{
+		XLength: 3,
+		YLength: 3,
+	}
+
+	t.Run("reject if place invalid on board", func(t *testing.T) {
+		robot := Robot{
+			Position:  Position{},
+			GameBoard: board,
+		}
+
+		err := robot.Move(8, 0)
+
+		expectedError := errors.New("Invalid move, must be on board")
+		if assert.Error(t, err) {
+			assert.Equal(t, expectedError, err)
+		}
+	})
+	//ttd rooles ok
+	//add a test to check to see if position is blank next
+
+}
+
 func TestRobotMove(t *testing.T) {
 	// Bootstrap - setup the board and the robot
 	// NOTE: We only have to do this once for our test suite instead doing it once for each test case
@@ -54,7 +78,7 @@ func TestRobotMove(t *testing.T) {
 	t.Run("Error if robot told to go out of bounds", func(t *testing.T) {
 		//return error
 		err := robot.Move(5, 0)
-		expectedError := errors.New("robot would fall overboard")
+		expectedError := errors.New("Invalid move, must be on board")
 		if assert.Error(t, err) {
 			assert.Equal(t, expectedError, err)
 		}

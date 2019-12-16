@@ -33,9 +33,19 @@ func (robot *Robot) Move(deltaX, deltaY int) error {
 	if !robot.isWithinBounds() {
 		robot.Position.X -= deltaX
 		robot.Position.Y -= deltaY
-		return errors.New("robot would fall overboard")
+		return errors.New("Invalid move, must be on board")
 	}
 
+	return nil
+}
+
+func (robot *Robot) Place(deltaX, deltaY int) error {
+	robot.Position.X = deltaX
+	robot.Position.Y = deltaY
+
+	if !robot.isWithinBounds() {
+		return errors.New("Invalid move, must be on board")
+	}
 	return nil
 }
 
