@@ -2,7 +2,10 @@ package toys
 
 //based on zak's example
 
-import "errors"
+import (
+	"errors"
+	"fmt"
+)
 
 // GameBoard is a 2D grid which can have robots moved around on it
 type GameBoard struct {
@@ -23,9 +26,14 @@ type Robot struct {
 	GameBoard GameBoard
 }
 
+func (robot *Robot) Report() error {
+	fmt.Println("i am reporting")
+	return nil
+}
+
 // Move moves the robot around the game board, where deltaX is the number of tiles to move in the X direction
 // and deltaY is the number of tiles to move in the Y direction.
-func (robot *Robot) Move(deltaX, deltaY int) error {
+func (robot *Robot) Move(deltaX, deltaY int) {
 
 	robot.Position.X += deltaX
 	robot.Position.Y += deltaY

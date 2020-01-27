@@ -32,6 +32,26 @@ func TestRobotPlace(t *testing.T) {
 	//add a test to check to see if position is blank next
 
 }
+func TestRobotReport(t *testing.T) {
+	//ask robot where it is.
+	board := GameBoard{
+		XLength: 3,
+		YLength: 3,
+	}
+
+	robot := Robot{
+		Position:  Position{X: 0, Y: 0},
+		GameBoard: board,
+	}
+
+	t.Run("Robot says where it is", func(t *testing.T) {
+		err := robot.Report
+		require.NoError(t, err) // If there is an error then this test suite will stop here
+		robotPos := robot.Here
+		expectedHere := Report{X: 0, Y: 0}
+		assert.Equal(t, robotPos, expectedHere)
+	})
+}
 
 func TestRobotMove(t *testing.T) {
 	// Bootstrap - setup the board and the robot
